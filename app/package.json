@@ -1,0 +1,30 @@
+{
+  "name": "snap-advocacy",
+  "productName": "Snap Advocacy Virtual Office",
+  "version": "1.0.0",
+  "description": "Step into the Snapcraft developer advocates virtual office.",
+  "homepage": "https://github.com/flexiondotorg/snap-advocacy",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flexiondotorg/snap-advocacy"
+  },
+  "author": {
+    "name": "Martin Wimpress",
+    "email": "code@flexion.org",
+    "url": "https://flexion.org"
+  },
+  "license": "MIT",
+  "main": "./main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "electron-builder": "^20.8.1"
+  },
+  "build": {
+    "linux": {
+      "target": ["dir"]
+    }
+  }
+}

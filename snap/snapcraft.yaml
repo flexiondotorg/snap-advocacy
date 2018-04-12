@@ -1,0 +1,67 @@
+name: snap-advocacy
+version: '1.0.0'
+summary: Step into the Snapcraft developer advocates virtual office.
+description: |
+  The Snapcraft developer advocacy team can be found working in their
+  virtual office most days. Come and join us in a snap!
+
+confinement: strict
+
+parts:
+  snap-advocacy:
+    source: app/
+    plugin: nodejs
+    node-engine: '9.11.1'
+    node-package-manager: yarn
+    after:
+      - desktop-glib-only
+    stage-packages:
+      - libappindicator1
+      - libasound2
+      - libgconf-2-4
+      - libgtk2.0-0
+      - libnotify4
+      - libnspr4
+      - libnss3
+      - libpcre3
+      - libpulse0
+      - libx11-xcb1
+      - libxss1
+      - libxtst6
+    build: |
+      node_modules/.bin/electron-builder
+    install: |
+      mkdir $SNAPCRAFT_PART_INSTALL/app
+      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
+    prime:
+      - -app/resources/app.asar.unpacked/
+      - -bin/node
+      - -bin/npm
+      - -include
+      - -lib/node_modules
+      - -node_modules
+      - -usr/share/doc
+      - -usr/share/man
+      - -usr/share/lintian
+      - -share/doc
+      - -share/man
+
+apps:
+  snap-advocacy:
+    command: desktop-launch $SNAP/app/snap-advocacy
+    # Correct the TMPDIR path for Chromium Framework/Electron to ensure
+    # libappindicator has readable resources.
+    environment:
+      TMPDIR: $XDG_RUNTIME_DIR
+    plugs:
+      - browser-support
+      - desktop
+      - desktop-legacy
+      - gsettings
+      - home
+      - opengl
+      - network
+      - pulseaudio
+      - unity7
+      - wayland
+      - x11

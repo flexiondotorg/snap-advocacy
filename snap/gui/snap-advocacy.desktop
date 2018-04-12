@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Snap Advocacy
+Icon=${SNAP}/meta/gui/snap-advocacy.png
+Categories=Network;
+Exec=snap-advocacy
+Terminal=false
