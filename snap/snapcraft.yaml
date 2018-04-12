@@ -1,5 +1,9 @@
 name: snap-advocacy
-version: '1.0.0'
+version: 'master'
+version-script: |
+  VER=$(grep version app/package.json | cut -d'"' -f4)
+  REV=$(git rev-parse --short HEAD)
+  echo $VER-$REV
 summary: Step into the Snapcraft developer advocates virtual office.
 description: |
   The Snapcraft developer advocacy team can be found working in their
