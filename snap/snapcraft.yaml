@@ -67,6 +67,7 @@ apps:
       - opengl
       - network
       - pulseaudio
+      - screen-inhibit-control
       - unity7
       - wayland
       - x11
