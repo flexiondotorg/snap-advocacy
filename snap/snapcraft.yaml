@@ -59,9 +59,9 @@ apps:
       TMPDIR: $XDG_RUNTIME_DIR
     plugs:
       - browser-support
+      - camera
       - desktop
       - desktop-legacy
-      - gsettings
       - home
       - opengl
       - network
