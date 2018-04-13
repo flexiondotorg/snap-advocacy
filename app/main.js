@@ -1,19 +1,28 @@
-const electron = require('electron');
-const { shell, app, BrowserWindow } = electron;
-const HOMEPAGE = 'https://talky.io/snap-advocacy'
+const { app, shell, BrowserWindow } = require('electron');
+const URL = 'https://talky.io/snap-advocacy'
 
 let mainWindow;
 
+app.commandLine.appendSwitch('enable-usermedia-screen-capturing');
+
 app.on('ready', () => {
     window = new BrowserWindow({
-        width: 1280,
-        height: 720,
+        width: 1278,
+        height: 675,
+        show: false,
         webPreferences: {
-          nodeIntegration: false
+          nodeIntegration: false,
+          plugins: true
         }
     });
+
     window.setMenuBarVisibility(false);
-    window.loadURL(HOMEPAGE);
+    window.loadURL(URL);
+
+    window.on('ready-to-show', () => {
+        window.show();
+        window.focus();
+    });
 
     window.webContents.on('did-finish-load', () => {
         window.setTitle('Snap Advocacy Virtual Office');
@@ -21,7 +30,7 @@ app.on('ready', () => {
 
     window.webContents.on('will-navigate', (ev, url) => {
         parts = url.split('/');
-        if (parts[0] + '//' + parts[2] != HOMEPAGE) {
+        if (parts[0] + '//' + parts[2] != URL) {
             ev.preventDefault();
             shell.openExternal(url);
         };
@@ -35,8 +44,6 @@ app.on('ready', () => {
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
   }
