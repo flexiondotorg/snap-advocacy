@@ -24,7 +24,12 @@
   },
   "build": {
     "linux": {
-      "target": ["dir"]
+      "target": [
+        "dir"
+      ]
     }
+  },
+  "dependencies": {
+    "electron-context-menu": "^0.9.1"
   }
 }
