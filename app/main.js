@@ -1,7 +1,14 @@
-const { app, shell, BrowserWindow } = require('electron');
 const URL = 'https://talky.io/snap-advocacy'
+const TITLE = 'Snap Advocacy Virtual Office'
+const { app, shell, BrowserWindow } = require('electron');
 
-let mainWindow;
+require('electron-context-menu')({
+    prepend: (params, browserWindow) => [{
+        label: 'Menu'
+    }]
+});
+
+let window;
 
 app.commandLine.appendSwitch('enable-usermedia-screen-capturing');
 
@@ -15,7 +22,6 @@ app.on('ready', () => {
           plugins: true
         }
     });
-
     window.setMenuBarVisibility(false);
     window.loadURL(URL);
 
@@ -25,7 +31,7 @@ app.on('ready', () => {
     });
 
     window.webContents.on('did-finish-load', () => {
-        window.setTitle('Snap Advocacy Virtual Office');
+        window.setTitle(TITLE);
     });
 
     window.webContents.on('will-navigate', (ev, url) => {
